@@ -24,7 +24,6 @@ function translate(rna) {
   for (let i = 0; i < numSlices; i++) {
     let sliced = rna.slice(0, 3);
     rnas.push(sliced);
-    console.log(rna);
   }
   console.log(rnas);
 }
