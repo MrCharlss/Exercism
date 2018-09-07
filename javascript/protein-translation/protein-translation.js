@@ -20,13 +20,26 @@ function translate(rna) {
   };
   let numSlices = rna.length / 3;
   let rnas = [];
-  console.log(numSlices);
+  let iUno = 0;
+  let iDos = 3;
+  let proteins = [];
   for (let i = 0; i < numSlices; i++) {
-    let sliced = rna.slice(0, 3);
+    let sliced = rna.slice(iUno, iDos);
     rnas.push(sliced);
+    iUno += 3;
+    iDos += 3;
   }
-  console.log(rnas);
+
+  for (let j = 0; j < rnas.length; j++) {
+    let rnaSep = rnas[j];
+    if (rnaSep === "UAA" || "UAG" || "UGA") {
+      console.log(rnaSep);
+    } /* else if (codons.hasOwnProperty(rnaSep)) {
+      proteins.push(codons[rnaSep]);
+    }
+    console.log(proteins); */
+  }
 }
 
-translate("AAAUGG");
+translate("AUGUAAUUUUGC");
 //export default translate;
