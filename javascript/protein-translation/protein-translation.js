@@ -18,28 +18,37 @@ function translate(rna) {
     UAG: "STOP",
     UGA: "STOP"
   };
-  let numSlices = rna.length / 3;
+  let stops = ["UAA", "UAG", "UGA"];
+  let numSlices;
   let rnas = [];
   let iUno = 0;
   let iDos = 3;
   let proteins = [];
+
+  if (!rna) {
+    return proteins;
+  } else {
+    numSlices = rna.length / 3;
+  }
+  //console.log(numSlices);
   for (let i = 0; i < numSlices; i++) {
     let sliced = rna.slice(iUno, iDos);
     rnas.push(sliced);
     iUno += 3;
     iDos += 3;
   }
+  //console.log(rnas);
 
-  for (let j = 0; j < rnas.length; j++) {
-    let rnaSep = rnas[j];
-    if (rnaSep === "UAA" || "UAG" || "UGA") {
-      console.log(rnaSep);
-    } /* else if (codons.hasOwnProperty(rnaSep)) {
-      proteins.push(codons[rnaSep]);
+  for (let i = 0; i < rnas.length; i++) {
+    if (stops.includes(rnas[i])) break;
+    else if (codons.hasOwnProperty(rnas[i])) {
+      proteins.push(codons[rnas[i]]);
+    } else {
+      throw "Invalid codon";
     }
-    console.log(proteins); */
   }
+  return proteins;
 }
 
-translate("AUGUAAUUUUGC");
-//export default translate;
+//translate("UUUUUC");
+export default translate;
